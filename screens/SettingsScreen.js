@@ -135,29 +135,31 @@
 
 
 import { View , Text ,StyleSheet} from "react-native"
-import { useState } from "react";
+//import { useState } from "react";
 import { Colors } from '../utilities/Color';
 import { Strings } from "../utilities/String";
 import { Switch } from 'react-native-switch';
 import i18next from '../localization/i18next';
 import { useTranslation } from 'react-i18next';
+import LanguageSettingsStore from "../storage/LanguageSettingsStore";
+import ThemeSettingsStore from "../storage/ThemeSettingsStore";
 
 function SettingsScreen(){
   const {t} = useTranslation(); 
+  
+  const [storedThemeValue , SetTheme] = ThemeSettingsStore()
 
-  const [isDarkMoodEnable, setIsDarkMoodEnable] = useState(false);
   const darkMoodToggleSwitch = () => {
-    setIsDarkMoodEnable(previousState => !previousState);
+    SetTheme(previousState => !previousState);
   }
 
-  const [isArLanguageEnable, setIsArLanguageEnable] = useState(false);
+  const [storedLanguageValue , SetLanguage] = LanguageSettingsStore()
 
   const ArLanguageToggleSwitch = () => {
-    setIsArLanguageEnable(previousState => !previousState);
-    isArLanguageEnable ? i18next.changeLanguage(Strings.arKey) : i18next.changeLanguage(Strings.enKey);
+    SetLanguage(previousState => !previousState);
+    storedLanguageValue ? i18next.changeLanguage(Strings.arKey) : i18next.changeLanguage(Strings.enKey);
   }
 
-  
   return (
     <View style={styles.container}>
       <View style={styles.toogleContainerStyle}>
@@ -172,7 +174,7 @@ function SettingsScreen(){
         circleActiveColor={Colors.black}
         circleInActiveColor={Colors.white}
         switchWidthMultiplier={5} 
-        value={isDarkMoodEnable}
+        value={storedThemeValue}
       />
      
       </View> 
@@ -189,7 +191,7 @@ function SettingsScreen(){
         circleActiveColor={Colors.black}
         circleInActiveColor={Colors.white}
         switchWidthMultiplier={5}
-        value={isArLanguageEnable}
+        value={storedLanguageValue}
       />
       </View>
     </View>

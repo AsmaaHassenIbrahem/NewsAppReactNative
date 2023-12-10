@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
 
 function UseAsyncStorage(key, initialvalue) {
 
-    const [storedValue, setStoredValue] = usestate();
+    const [storedValue, setStoredValue] = useState();
   
     async function getStoredItem(key, initialvalue) {
       try {

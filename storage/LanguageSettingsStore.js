@@ -1,7 +1,7 @@
 import { Strings } from "../utilities/String";
 import UseAsyncStorage from "../hooks/UseAsyncStorage";
 
-const {storedLanguageValue, setLanguageValue} = UseAsyncStorage(Strings.languageKey, value);
+const {storedLanguageValue, setLanguageValue} = UseAsyncStorage(Strings.languageKey, value=false);
 
 function LanguageSettingsStore(){
 
