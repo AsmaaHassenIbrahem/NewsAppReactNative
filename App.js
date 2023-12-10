@@ -8,7 +8,6 @@ import TabScreens from './screens/TabScreens';
 import { Colors } from './utilities/Color';
 import { Strings } from './utilities/String';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { Fragment } from 'react';
 
 const Stack = createNativeStackNavigator();

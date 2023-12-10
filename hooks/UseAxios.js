@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 import ArticleItem from '../apis/dataResponse';
+
 const UseAxios = () => {
   const [newsData, setNewsData] = useState({});
   const [loading, setLoading] = useState(true);
