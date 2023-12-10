@@ -1,16 +1,15 @@
 import { Strings } from "../utilities/String";
 import UseAsyncStorage from "../hooks/UseAsyncStorage";
-import { changeLanguage } from "i18next";
 
 const {storedThemeValue, setThemeValue} = UseAsyncStorage(Strings.themeKet, value);
 
 function ThemeSettingsStore(){
 
-    const ChangeTheme = (value) => {
+    const SetTheme = (value) => {
       setThemeValue(value)
     };
     
-    return[storedThemeValue , ChangeTheme]
+    return[storedThemeValue , SetTheme]
     }
   
 export default ThemeSettingsStore
