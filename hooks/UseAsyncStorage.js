@@ -3,15 +3,15 @@ import { useState , useEffect } from 'react';
 
 const UseAsyncStorage = (key, initialvalue) => {
 
-  const [storedValue, setStoredValue] = useState();
+  const [storedValue, setStoredValue] = useState(false);
 
     const getStoredItem = async (key, initialvalue) => {
       try {
         const item = await AsyncStorage.getItem(key);
-        const value = item ? json.parse(item) : initialvalue;
+        const value = item ? JSON.parse(item) : initialvalue;
         setStoredValue(value);
       } catch (error) {
-        console.log(error);
+        console.log("getStore "+error);
       }
     }
   
@@ -21,14 +21,15 @@ const UseAsyncStorage = (key, initialvalue) => {
   
     const setvalue = async (value) => {
       try {
+
           setStoredValue(value);
-        await AsyncStorage.setItem(key, json.stringify(value));
+        await AsyncStorage.setItem(key, JSON.stringify(value));
       } catch (error) {
-        console.log(error);
+        console.log("setStore "+error);
       }
     };
   
-    return [storedValue, setvalue];
+    return {storedValue, setvalue};
   };
 
   export default UseAsyncStorage

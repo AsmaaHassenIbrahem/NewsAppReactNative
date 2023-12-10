@@ -25,21 +25,15 @@ const styles = StyleSheet.create({
     cardContainer: {
         backgroundColor: Colors.primary, 
         borderRadius: 8, 
-        padding: 16, 
+        padding: 18, 
         shadowColor: Colors.secondry, 
         shadowOffset: { width: 0, height: 2 }, 
-        shadowOpacity: 0.3, 
-        shadowRadius: 4, 
-        elevation: 10, // Required for Android 
-        flexDirection: 'row',
-        margin : 10
+        shadowOpacity: 0.3
     },
-
     textStyle:{
-        borderWith: 1,
-        borderColor: Colors.secondry,
+        textAlign:'center',
         color: Colors.textColor,
-        width: '100%'
+        maxWidth: '90%'
     },
     imageStyle :{
         resizeMode: 'contain',

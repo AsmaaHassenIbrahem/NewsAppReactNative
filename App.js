@@ -9,6 +9,8 @@ import { Colors } from './utilities/Color';
 import { Strings } from './utilities/String';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Fragment } from 'react';
+import { Provider } from 'react-redux';
+import { ReduxStore } from './storage/ReduxStore';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +21,7 @@ export default function App() {
   return (
 <Fragment>
 <StatusBar style='dark'/>
-
+<Provider store={ReduxStore}>
 <NavigationContainer>
 <Stack.Navigator 
    screenOptions={{
@@ -42,7 +44,7 @@ export default function App() {
   />
 </Stack.Navigator>
      </NavigationContainer> 
-  
+     </Provider>
 </Fragment>
   );
 }

@@ -147,14 +147,12 @@ import ThemeSettingsStore from "../storage/ThemeSettingsStore";
 function SettingsScreen(){
   const {t} = useTranslation(); 
   
-  const [storedThemeValue , SetTheme] = ThemeSettingsStore()
-
+  const {storedThemeValue , SetTheme} = ThemeSettingsStore()
   const darkMoodToggleSwitch = () => {
     SetTheme(previousState => !previousState);
   }
 
-  const [storedLanguageValue , SetLanguage] = LanguageSettingsStore()
-
+  const {storedLanguageValue , SetLanguage} = LanguageSettingsStore()
   const ArLanguageToggleSwitch = () => {
     SetLanguage(previousState => !previousState);
     storedLanguageValue ? i18next.changeLanguage(Strings.arKey) : i18next.changeLanguage(Strings.enKey);

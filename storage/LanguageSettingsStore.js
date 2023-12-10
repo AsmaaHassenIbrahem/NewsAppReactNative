@@ -3,13 +3,13 @@ import UseAsyncStorage from "../hooks/UseAsyncStorage";
 
 const LanguageSettingsStore = () => {
   
-  const [storedLanguageValue, setLanguageValue] = UseAsyncStorage(Strings.languageKey, value=false);
+  const {storedValue, setvalue} = UseAsyncStorage(Strings.languageKey, value="false");
 
   const SetLanguage = (value) => {
-    setLanguageValue(value)
+    setvalue(value)
   };
 
-  return [storedLanguageValue , SetLanguage];
+  return {storedValue , SetLanguage};
 
 };
 

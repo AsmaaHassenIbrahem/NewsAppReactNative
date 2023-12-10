@@ -2,14 +2,14 @@ import { Strings } from "../utilities/String";
 import UseAsyncStorage from "../hooks/UseAsyncStorage";
 
 const ThemeSettingsStore = () => {
-    const [storedThemeValue, setThemeValue] = UseAsyncStorage(Strings.themeKet, value=false);
+    const {storedValue, setvalue} = UseAsyncStorage(Strings.themeKet, value=false);
 
     const SetTheme = (value) => {
-      setThemeValue(value)
+        setvalue(value)
     };
     
-    return [storedThemeValue , SetTheme];
-    
+    return {storedValue , SetTheme};
+
     };
   
 export default ThemeSettingsStore

@@ -3,7 +3,7 @@ import axios from 'axios';
 import ArticleItem from '../apis/dataResponse';
 
 const UseAxios = () => {
-  const [newsData, setNewsData] = useState({});
+  const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -12,15 +12,10 @@ const UseAxios = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true)
         const response = await axios.get(url, {
           'Content-Type': 'application/json'});
-
-        //const re = await response.get("satus")
-        console.log("data "+ response.data)
-        // const json = await response.json()
-        // console.log("dataJ "+ json)
-
-        //setNewsData(response.json);
+        setNewsData(response.data.articles);
       } catch (error) {
         console.log("error "+ error)
 
