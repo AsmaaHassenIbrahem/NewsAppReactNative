@@ -133,123 +133,103 @@
 //     },
 //   });
 
-
-import { View , Text ,StyleSheet} from "react-native"
+import { View, Text, StyleSheet } from "react-native";
 //import { useState } from "react";
-import { Colors } from '../utilities/Color';
 import { Strings } from "../utilities/String";
-import { Switch } from 'react-native-switch';
-import i18next from '../localization/i18next';
-import { useTranslation } from 'react-i18next';
-import LanguageSettingsStore from "../storage/LanguageSettingsStore";
-import ThemeSettingsStore from "../storage/ThemeSettingsStore";
+import { Switch } from "react-native-switch";
+import { useAppContext } from "../context/appContext";
+import I18n from "../localization/translations/index";
 
-function SettingsScreen(){
-  const {t} = useTranslation(); 
-  
-  const [storedThemeValue , SetTheme] = ThemeSettingsStore()
-
-  const darkMoodToggleSwitch = () => {
-    SetTheme(previousState => !previousState);
+function SettingsScreen() {
+  if (!I18n) {
+    return null; // Or handle the absence of i18n appropriately
   }
 
-  const [storedLanguageValue , SetLanguage] = LanguageSettingsStore()
-
-  const ArLanguageToggleSwitch = () => {
-    SetLanguage(previousState => !previousState);
-    storedLanguageValue ? i18next.changeLanguage(Strings.arKey) : i18next.changeLanguage(Strings.enKey);
-  }
+  const { t } = I18n;
+  console.log("here", t(Strings.Light));
+  const { language, darkMode, Colors, toggleLanguage, toggleDarkMode } =
+    useAppContext();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: Colors.background }]}>
       <View style={styles.toogleContainerStyle}>
-      <Text style={styles.TextStyle}>{t('textToogleThemeMood')}</Text>
-      <Switch
-        activeText={t(Strings.dark)}
-        inActiveText={t(Strings.Light)}
-        backgroundActive={Colors.secondry}
-        backgroundInactive={Colors.primary}
-        onValueChange={darkMoodToggleSwitch}
-        circleBorderWidth={2}
-        circleActiveColor={Colors.black}
-        circleInActiveColor={Colors.white}
-        switchWidthMultiplier={5} 
-        value={storedThemeValue}
-      />
-     
-      </View> 
+        <Text style={[styles.TextStyle, { color: Colors.text }]}>
+          {t("textToogleThemeMood")}
+        </Text>
+        <Switch
+          activeText={t(Strings.dark)}
+          inActiveText={t(Strings.Light)}
+          onValueChange={() => toggleDarkMode()}
+          circleBorderWidth={2}
+          switchWidthMultiplier={5}
+          value={darkMode}
+        />
+      </View>
 
       <View style={styles.toogleContainerStyle}>
-      <Text style={styles.TextStyle}> {t(Strings.textToggleLanguage) }</Text>
-      <Switch
-        activeText={t(Strings.arabic)}
-        inActiveText={t(Strings.english)}
-        backgroundActive={Colors.secondry}
-        backgroundInactive={Colors.primary}
-        onValueChange={ArLanguageToggleSwitch}
-        circleBorderWidth={2}
-        circleActiveColor={Colors.black}
-        circleInActiveColor={Colors.white}
-        switchWidthMultiplier={5}
-        value={storedLanguageValue}
-      />
+        <Text style={[styles.TextStyle, { color: Colors.text }]}>
+          {" "}
+          {t(Strings.textToggleLanguage)}
+        </Text>
+        <Switch
+          activeText={t(Strings.arabic)}
+          inActiveText={t(Strings.english)}
+          onValueChange={() => toggleLanguage()}
+          circleBorderWidth={2}
+          switchWidthMultiplier={5}
+          value={language == "ar"}
+        />
       </View>
     </View>
   );
 }
 
-export default SettingsScreen
+export default SettingsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    backgroundColor : Colors.background,
-    paddingTop:50,
+    flex: 1,
+    paddingTop: 50,
     padding: 20,
-    alignContent: "center"
+    alignContent: "center",
   },
-  TextStyle:{
+  TextStyle: {
     margin: 20,
     alignItems: "center",
     fontSize: 15,
-    fontWeight: 'bold',
-    color: Colors.textColor
-
+    fontWeight: "bold",
   },
-  toogleContainerStyle:{
+  toogleContainerStyle: {
     marginBottom: 50,
-    alignItems: "center"
-  },
-  cardContainer:{
- flex:1,
- flexDirection: 'row'
-
-  },
-  card_template:{
-    width: 250,
-    height: 250,
-    boxShadow: "10px 10px 17px -12px rgba(0,0,0,0.75)"
-  },
-
-  text_container:{
-    position: "absolute",
-    bottom:0,
-    padding: 5,
-    fontSize:20,
-    backgroundColor: "rgba(0,0,0, 0.3)",
-    borderBottomLeftRadius : 10,
-    borderBottomRightRadius: 10
+    alignItems: "center",
   },
   cardContainer: {
-    backgroundColor: Colors.primary, 
-    borderRadius: 8, 
-    padding: 16, 
-    shadowColor: Colors.secondry, 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.3, 
-    shadowRadius: 4, 
-    elevation: 10, // Required for Android 
-    flexDirection: 'row',
-    margin : 10
-},
+    flex: 1,
+    flexDirection: "row",
+  },
+  card_template: {
+    width: 250,
+    height: 250,
+    boxShadow: "10px 10px 17px -12px rgba(0,0,0,0.75)",
+  },
+
+  text_container: {
+    position: "absolute",
+    bottom: 0,
+    padding: 5,
+    fontSize: 20,
+    backgroundColor: "rgba(0,0,0, 0.3)",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  cardContainer: {
+    borderRadius: 8,
+    padding: 16,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 10, // Required for Android
+    flexDirection: "row",
+    margin: 10,
+  },
 });

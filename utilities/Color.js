@@ -1,13 +1,22 @@
 
-export const Colors = {
+
+
+export const lightModeColors = {
+    text: '#222',
     primary: '#94B4AB', 
     secondry: '#656469', 
-    textColor: '#0d1c4c',
-    background: '#D4CDC1',
-    white: '#ffffff', 
-    black: '#000000'
-}
-
+    textAccent: '#444',
+    background: '#fff'
+  }
+  
+  export const darkModeColors = {
+    secondry: '#94B4AB', 
+    primary: '#656469', 
+    text: '#fff',
+    textAccent: '#ccc',
+    background: '#222'
+  }
+  
 // const commonColor = {
 //     commonWhite: '#FFFFFF',
 //     commonBlack: '#000000',
