@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import NewsItemScreen from "./NewsItemScreen.js";
 import UseAxios from "../hooks/UseAxios";
 import SearchBar from "react-native-material-design-searchbar";
-import { useAppContext } from '../storage/AppProvider';
+import { useAppContext } from "../storage/AppProvider";
 
 function HomeScreen({ navigation }) {
   const { theme } = useAppContext();
@@ -22,7 +22,7 @@ function HomeScreen({ navigation }) {
     return (
       <NewsItemScreen
         title={itemData.item.title}
-        image = {itemData.item.urlToImage}
+        image={itemData.item.urlToImage}
         onPress={pressHandler}
       />
     );
@@ -37,12 +37,19 @@ function HomeScreen({ navigation }) {
         autoCorrect={false}
         padding={5}
         iconColor={theme.secondry}
-        placeholderColor={theme.secondry}
+        placeholderColor={theme.text}
+        textStyle={{ color: theme.text }}
         returnKeyType={"search"}
       />
 
-<FlatList alwaysBounceVertical={false} data={newsData.filter(newData => search == "" || newData.title.indexOf(search) > -1)} keyExtractor={(item) => item.description}
-      renderItem={renderDataItem}/>
+      <FlatList
+        alwaysBounceVertical={false}
+        data={newsData.filter(
+          (newData) => search == "" || newData.title.indexOf(search) > -1
+        )}
+        keyExtractor={(item, i) => i}
+        renderItem={renderDataItem}
+      />
     </View>
   );
 }

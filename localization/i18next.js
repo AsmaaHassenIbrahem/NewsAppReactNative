@@ -1,18 +1,23 @@
 import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
-import {en} from "./translations/en.json"
-import {ar} from "./translations/ar.json"
+import { Translation, initReactI18next } from "react-i18next";
+import * as Localization from "expo-localization";
+import en from "./translations/en";
+import ar from "./translations/ar";
 
 const languageResources = {
-  en: { translation: en },
-  ar: { translation: ar },
+  ar: {
+    translation: ar,
+  },
+  en: {
+    translation: en,
+  },
 };
 
 i18next.use(initReactI18next).init({
-  compatibilityJSON: 'v3', //To make it work for Android devices, add this line.
-  resources : languageResources,
+  resources: languageResources,
+  defaultLanguage: "ar",
   //language to use if translations in user language are not available
-  fallbackLng: "en",
+  fallbackLng: "ar",
   interpolation: {
     escapeValue: false, // not needed for react!!
   },

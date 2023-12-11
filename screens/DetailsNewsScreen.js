@@ -1,18 +1,19 @@
-import { View , Text, Pressable} from "react-native"
+import { View, Text, Pressable } from "react-native";
+import { useAppContext } from "../storage/AppProvider";
 
-function DetailsNewsScreen({route}){
+function DetailsNewsScreen({ route }) {
   //  const cardId = route.params.itemId;
-    const title = route.params.title
-
-    return (
+  const title = route.params.title;
+  const { theme } = useAppContext();
+  return (
+    <View>
+      <Pressable>
         <View>
-            <Pressable>
-                <View>
-                    <Text>{title}</Text>
-                </View>
-            </Pressable>
+          <Text style={{ color: theme.text }}>{title}</Text>
         </View>
-    );
+      </Pressable>
+    </View>
+  );
 }
 
-export default DetailsNewsScreen
+export default DetailsNewsScreen;

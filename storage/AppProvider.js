@@ -1,31 +1,38 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { darkModeColors } from "../utilities/Color";
 import { lightModeColors } from "../utilities/Color";
+import { useTranslation } from "react-i18next";
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [language, setLanguage] = useState("en"); // Default language
   const [darkMode, setDarkMode] = useState(false); // Default mode
-//   const [theme, setTheme] = useState(lightModeColors); // Default mode
+  const { i18n } = useTranslation();
 
-  const toggleLanguage = () =>
-    setLanguage((prevLanguage) => (prevLanguage === "en" ? "ar" : "en"));
-  const toggleDarkMode = () => { 
+  const toggleLanguage = () => {
+    setLanguage((prevLanguage) => {
+      return prevLanguage === "en" ? "ar" : "en";
+    });
+  };
+  const toggleDarkMode = () => {
     setDarkMode((prevMode) => !prevMode);
     // !darkMode ? setTheme(lightModeColors ): setTheme(darkModeColors)
-
-}
+  };
+  useEffect(() => {
+    i18n.changeLanguage(language === "en" ? "ar" : "en");
+  }, [language]);
 
   return (
     <AppContext.Provider
       value={{
-       theme: !darkMode ? lightModeColors : darkModeColors, // here is problem with this property 
+        theme: !darkMode ? lightModeColors : darkModeColors, // here is problem with this property
         language,
         darkMode,
         toggleLanguage,
         toggleDarkMode,
-      }}>
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

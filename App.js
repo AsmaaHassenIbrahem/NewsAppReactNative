@@ -1,6 +1,6 @@
+import "./localization/i18next";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text } from "react-native";
-import i18next from "./localization/i18next";
 import { useTranslation } from "react-i18next";
 import { NavigationContainer } from "@react-navigation/native";
 import DetailsNewsScreen from "./screens/DetailsNewsScreen";
