@@ -6,7 +6,7 @@ export default {
   textToggleLanguage: " بدل لتغيير اللغة",
   textToogleThemeMood: " بدل لتغيير سمة الهاتف",
   dark: "ليلي",
-  Light: "نهاري",
+  light: "نهاري",
   english: "الانجليزية",
   arabic: "العربيه",
 };

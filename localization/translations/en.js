@@ -6,7 +6,7 @@ export default {
   textToggleLanguage: " Toggle to change your language",
   textToogleThemeMood: " Toggle to change your Theme Mood",
   dark: "Dark",
-  Light: "Light",
+  light: "Light",
   english: "English",
   arabic: "Arabic",
 };

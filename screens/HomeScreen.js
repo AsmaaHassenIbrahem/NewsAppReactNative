@@ -16,7 +16,7 @@ function HomeScreen({ navigation }) {
 
   function renderDataItem(itemData) {
     function pressHandler() {
-      navigation.navigate(Strings.details, { title: itemData.item.title });
+      navigation.navigate(Strings.details, { item: itemData.item});
     }
 
     return (
