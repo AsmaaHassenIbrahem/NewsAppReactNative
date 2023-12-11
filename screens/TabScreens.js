@@ -3,21 +3,14 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import HomeScreen from "./HomeScreen";
 import SettingsScreen from "./SettingsScreen";
 import { Strings } from "../utilities/String";
-import { useAppContext } from '../storage/AppProvider';
-
-
-//import i18n from "../localization/translations";
+import { useAppContext } from "../storage/AppProvider";
+import { useTranslation } from "react-i18next";
 
 const Tab = createMaterialBottomTabNavigator();
 
 function TabScreens() {
-  // if (!i18n) {
-  //   return null; // Or handle the absence of i18n appropriately
-  // }
-
-  // const { t } = i18n;
-  //console.log(t(Strings.settings));
   const { theme } = useAppContext();
+  const { t } = useTranslation();
 
   return (
     <Tab.Navigator
@@ -35,7 +28,7 @@ function TabScreens() {
           ),
         }}
       />
-       <Tab.Screen
+      <Tab.Screen
         name={Strings.settings}
         component={SettingsScreen}
         options={{
@@ -44,7 +37,7 @@ function TabScreens() {
             <Ionicons name={Strings.settings} color={color} size={20} />
           ),
         }}
-      /> 
+      />
     </Tab.Navigator>
   );
 }

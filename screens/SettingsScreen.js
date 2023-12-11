@@ -1,17 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Strings } from "../utilities/String";
 import { Switch } from "react-native-switch";
-import { useAppContext } from '../storage/AppProvider';
-// import I18n from "../localization/translations/index";
+import { useAppContext } from "../storage/AppProvider";
+import { useTranslation } from "react-i18next";
 
 function SettingsScreen() {
-  // if (!I18n) {
-  //   return null; // Or handle the absence of i18n appropriately
-  // }
-
-  // const { t } = I18n;
-  // console.log("here", t(Strings.Light));
-  const { language, darkMode, theme, toggleLanguage, toggleDarkMode } = useAppContext();
+  const { t } = useTranslation();
+  const { language, darkMode, theme, toggleLanguage, toggleDarkMode } =
+    useAppContext();
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -84,5 +80,5 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0, 0.3)",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-  }
+  },
 });

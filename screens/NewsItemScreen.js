@@ -1,4 +1,5 @@
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
+import { useAppContext } from "../storage/AppProvider";
 
 function NewsItemScreen({ title, image, onPress }) {
   const { theme } = useAppContext();
@@ -43,8 +44,9 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
-    borderWith: 1,
-    width: "100%",
+    width: "80%",
+    flex: 1,
+    flexWrap: "wrap",
   },
   imageStyle: {
     resizeMode: "contain",
