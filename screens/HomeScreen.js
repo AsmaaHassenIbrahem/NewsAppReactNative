@@ -1,60 +1,58 @@
-import { StyleSheet,  View , Text , FlatList} from "react-native"
+import { StyleSheet, View, Text, FlatList } from "react-native";
+import axios from "axios";
 import { Strings } from "../utilities/String";
-import { useState , useEffect } from "react";
-import { Colors } from '../utilities/Color';
+import { useState, useEffect } from "react";
 import NewsItemScreen from "./NewsItemScreen.js";
 import UseAxios from "../hooks/UseAxios";
-import SearchBar from 'react-native-material-design-searchbar';
+import SearchBar from "react-native-material-design-searchbar";
+import { useAppContext } from '../storage/AppProvider';
 
-function HomeScreen({navigation}){
+function HomeScreen({ navigation }) {
+  const { theme } = useAppContext();
 
   const [search, setSearch] = useState("");
 
-  const {newsData,loading,error} = UseAxios();
+  const { newsData, loading, error } = UseAxios();
 
-  function renderDataItem(itemData){
-    function pressHandler(){
-      navigation.navigate(Strings.details, 
-        {title: itemData.item.title});
+  function renderDataItem(itemData) {
+    function pressHandler() {
+      navigation.navigate(Strings.details, { title: itemData.item.title });
     }
-      
-    return <NewsItemScreen 
-    title={itemData.item.title} 
-    image = {itemData.item.urlToImage}
-    onPress={pressHandler}/>
-  }
-  
-  console.log(search , newsData.filter(newData => search == "" || newData.title.indexOf(search) > -1).length)
 
     return (
-      <View style={styles.container}>
-        <SearchBar
+      <NewsItemScreen
+        title={itemData.item.title}
+        image = {itemData.item.urlToImage}
+        onPress={pressHandler}
+      />
+    );
+  }
+
+  return (
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <SearchBar
         onSearchChange={(text) => setSearch(text)}
         height={50}
-        placeholder={'Search...'}
+        placeholder={"Search..."}
         autoCorrect={false}
         padding={5}
-        iconColor={Colors.secondry}
-        placeholderColor= {Colors.secondry}
-        returnKeyType={'search'}
+        iconColor={theme.secondry}
+        placeholderColor={theme.secondry}
+        returnKeyType={"search"}
       />
 
-<FlatList alwaysBounceVertical={false} 
-data={newsData.filter(newData => search == "" || newData.title.indexOf(search) > -1)} 
-keyExtractor={(item) => item.title}
+<FlatList alwaysBounceVertical={false} data={newsData.filter(newData => search == "" || newData.title.indexOf(search) > -1)} keyExtractor={(item) => item.description}
       renderItem={renderDataItem}/>
-      </View>
-    );
+    </View>
+  );
 }
 
-export default HomeScreen
+export default HomeScreen;
 
 const styles = StyleSheet.create({
-   container: {
-    flex:1,
-    backgroundColor : Colors.background,
-    paddingTop:30,
-    padding: 20
-
-  }
+  container: {
+    flex: 1,
+    paddingTop: 30,
+    padding: 20,
+  },
 });

@@ -1,33 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View , Text } from 'react-native';
-import i18next from './localization/i18next';
-import { useTranslation } from 'react-i18next';
+// import i18next from './localization/i18next';
+// import { useTranslation } from 'react-i18next';
 import { NavigationContainer} from '@react-navigation/native'
 import DetailsNewsScreen from './screens/DetailsNewsScreen';
 import TabScreens from './screens/TabScreens';
-import { Colors } from './utilities/Color';
 import { Strings } from './utilities/String';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Fragment } from 'react';
-import { Provider } from 'react-redux';
-import { ReduxStore } from './storage/ReduxStore';
+import { AppProvider, useAppContext } from './storage/AppProvider';
 
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
-  const {t} = useTranslation(); 
+  const { theme } = useAppContext();
 
   return (
-<Fragment>
-<StatusBar style='dark'/>
-<Provider store={ReduxStore}>
+<>
+ <StatusBar style='dark'/>
+
 <NavigationContainer>
+<AppProvider>
 <Stack.Navigator 
    screenOptions={{
-    headerStyle: { backgroundColor: Colors.primary },
-    headerTintColor: Colors.secondry,
-    contentStyle: { backgroundColor: Colors.background },
+    headerStyle: { backgroundColor: theme.primary },
+    headerTintColor: theme.secondry,
+    contentStyle: { backgroundColor: theme.background },
   }}>
 
   <Stack.Screen
@@ -43,16 +42,19 @@ export default function App() {
   }}
   />
 </Stack.Navigator>
+</AppProvider>
      </NavigationContainer> 
-     </Provider>
-</Fragment>
+
+ </>
+
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: "white",
     alignItems: 'center',
     justifyContent: 'center',
   }
