@@ -20,7 +20,7 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-       theme: !darkMode ? lightModeColors : darkModeColors,
+       theme: !darkMode ? lightModeColors : darkModeColors, // here is problem with this property 
         language,
         darkMode,
         toggleLanguage,
